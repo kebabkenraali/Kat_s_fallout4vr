@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 
-namespace kat_loco
+namespace swing_sprint
 {
     namespace
     {

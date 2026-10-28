@@ -4,7 +4,7 @@
 
 #include "vrcf/VRControllersSuppressor.h"
 
-namespace kat_loco
+namespace swing_sprint
 {
     /**
      * Presses a controller button for the game without the player touching it.

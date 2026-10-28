@@ -4,12 +4,12 @@
 #include "ModBase.h"
 #include "SwingDetector.h"
 
-namespace kat_loco
+namespace swing_sprint
 {
-    class KATLocomotionVR : public ModBase
+    class SwingSprintVR : public ModBase
     {
     public:
-        KATLocomotionVR()
+        SwingSprintVR()
             : ModBase(Settings(Version::PROJECT, Version::NAME, &g_config, 32, true))
         {}
 
@@ -49,5 +49,5 @@ namespace kat_loco
     };
 
     // The ONE global to rule them ALL
-    inline KATLocomotionVR g_katLocomotion;
+    inline SwingSprintVR g_swingSprint;
 }

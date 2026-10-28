@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-using namespace kat_loco;
+using namespace swing_sprint;
 
 namespace
 {

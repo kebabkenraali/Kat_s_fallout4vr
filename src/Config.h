@@ -7,7 +7,7 @@
 #include "common/CommonUtils.h"
 #include "vrcf/VRControllersManager.h"
 
-namespace kat_loco
+namespace swing_sprint
 {
     static const auto BASE_MOD_PATH = BASE_PATH + "\\" + std::string(Version::PROJECT);
     static const auto INI_PATH = BASE_MOD_PATH + "\\" + std::string(Version::PROJECT) + ".ini";

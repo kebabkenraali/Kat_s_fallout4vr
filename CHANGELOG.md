@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 - 2026-10-28
+
+- Renamed from *KAT Locomotion VR* to **Swing Sprint VR**: the mod works standalone, without a KAT Loco S. Files are
+  now `SwingSprintVR.dll`, `SwingSprintVR.ini`, the MCM page *Swing Sprint VR*. Remove the old mod before
+  installing; settings are not carried over.
+- The speed is no longer stored in save games: right before each save SpeedMult is put back to 100 and reapplied
+  after, so the mod can be removed at any time.
+
 ## 0.3.0 - 2026-10-28
 
 - MCM: every slider has - and + buttons below it that step the value, since VR sliders are hard to drag.

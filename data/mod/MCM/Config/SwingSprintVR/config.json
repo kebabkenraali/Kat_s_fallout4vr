@@ -1,10 +1,10 @@
 {
   "minMcmVersion": 1,
-  "modName": "KATLocomotionVR",
-  "displayName": "KAT Locomotion VR",
+  "modName": "SwingSprintVR",
+  "displayName": "Swing Sprint VR",
   "content": [
     {
-      "text": "<font size=\"32\"><p align=\"center\">KAT Locomotion VR</p></font>",
+      "text": "<font size=\"32\"><p align=\"center\">Swing Sprint VR</p></font>",
       "html": true,
       "type": "text"
     },
@@ -47,7 +47,7 @@
       "help": "Lower Interior speed by 5 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fInteriorSpeedMult:Main",
@@ -63,7 +63,7 @@
       "help": "Raise Interior speed by 5 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fInteriorSpeedMult:Main",
@@ -91,7 +91,7 @@
       "help": "Lower Exterior speed by 5 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fExteriorSpeedMult:Main",
@@ -107,7 +107,7 @@
       "help": "Raise Exterior speed by 5 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fExteriorSpeedMult:Main",
@@ -194,7 +194,7 @@
       "help": "Lower Swing speed to start sprint by 0.1 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSwingStartSpeed:Main",
@@ -210,7 +210,7 @@
       "help": "Raise Swing speed to start sprint by 0.1 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSwingStartSpeed:Main",
@@ -238,7 +238,7 @@
       "help": "Lower Swing speed to stop sprint by 0.1 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSwingStopSpeed:Main",
@@ -254,7 +254,7 @@
       "help": "Raise Swing speed to stop sprint by 0.1 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSwingStopSpeed:Main",
@@ -282,7 +282,7 @@
       "help": "Lower Swing smoothing (s) by 0.05 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSwingSmoothing:Main",
@@ -298,7 +298,7 @@
       "help": "Raise Swing smoothing (s) by 0.05 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSwingSmoothing:Main",
@@ -326,7 +326,7 @@
       "help": "Lower Sprint stop delay (s) by 0.1 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSprintStopDelay:Main",
@@ -342,7 +342,7 @@
       "help": "Raise Sprint stop delay (s) by 0.1 (VR sliders are hard to drag).",
       "action": {
         "type": "CallGlobalFunction",
-        "script": "KATLocomotionVR_MCM",
+        "script": "SwingSprintVR_MCM",
         "function": "StepFloat",
         "params": [
           "fSprintStopDelay:Main",

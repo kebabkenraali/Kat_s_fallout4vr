@@ -1,7 +1,8 @@
-# KAT Locomotion VR
+# Swing Sprint VR
 
-An F4SE VR plugin for **Fallout 4 VR** made for playing with a **KAT VR Loco S** (or any walk-in-place / treadmill
-locomotion) and **Meta Quest 2** controllers:
+An F4SE VR plugin for **Fallout 4 VR**: run by swinging your arms, and walk at a different speed indoors and
+outdoors. It works standalone with any VR controllers and any way of moving: the thumbstick, a walk-in-place device
+such as the **KAT VR Loco S**, or a treadmill. It was made with a KAT Loco S and Meta Quest 2 controllers.
 
 - **Movement speed by location** – separate walking speed for interiors and exteriors, so tight buildings and vaults
   don't feel too fast while the open world doesn't feel too slow.
@@ -24,11 +25,19 @@ Made with Claude AI
 | [F4SEVR](https://f4se.silverlock.org/) 0.6.21 | Fallout 4 Script Extender for VR |
 | [VR Address Library for F4SEVR](https://www.nexusmods.com/fallout4/mods/64879) | Required, the plugin won't load without it |
 | [Mod Configuration Menu](https://www.nexusmods.com/fallout4/mods/21497), VR version | Optional, for the in-game settings menu |
-| KAT Gateway | For the KAT Loco S. Not needed by the mod itself, any locomotion works |
+
+No locomotion hardware is needed. With a KAT Loco S, keep KAT Gateway running as usual: the mod adds the sprint on
+top of the KAT input.
+
+### Upgrading from KAT Locomotion VR (0.3.0 and older)
+
+The mod was called *KAT Locomotion VR* before 0.4.0. Remove the old mod in MO2 before installing this one, so the
+two plugins don't run at the same time. Your old settings are not carried over: set them again in MCM or in the new
+INI. The old `Mods_Config\KATLocomotionVR` folder and `MCM\Settings\KATLocomotionVR.ini` can be deleted.
 
 ## Installation (Mod Organizer 2)
 
-1. Download the `KAT Locomotion VR - vX.Y.Z.7z` archive from [Releases](../../releases).
+1. Download the `Swing Sprint VR - vX.Y.Z.7z` archive from [Releases](../../releases).
 2. In MO2 choose **Install a new mod from an archive** and pick the archive.
 3. Enable the mod in the left pane.
 4. Start the game through MO2 with the F4SEVR loader (`f4sevr_loader.exe`).
@@ -36,14 +45,14 @@ Made with Claude AI
 Manual install: extract the archive into `Fallout 4 VR\Data`.
 
 On first start the mod creates its settings file at
-`Documents\My Games\Fallout4VR\Mods_Config\KATLocomotionVR\KATLocomotionVR.ini` and logs to
-`Documents\My Games\Fallout4VR\F4SE\KATLocomotionVR.log`.
+`Documents\My Games\Fallout4VR\Mods_Config\SwingSprintVR\SwingSprintVR.ini` and logs to
+`Documents\My Games\Fallout4VR\F4SE\SwingSprintVR.log`.
 
 ## Settings
 
 Changes are applied while the game is running, both from MCM and from the INI file.
 
-**When MCM VR is installed, the values on its *KAT Locomotion VR* page override the same values in the INI file.**
+**When MCM VR is installed, the values on its *Swing Sprint VR* page override the same values in the INI file.**
 Settings MCM doesn't show stay in the INI.
 
 VR sliders are hard to drag, so every slider on the MCM page has a `[ - ]` and a `[ + ]` button below it that
@@ -99,18 +108,19 @@ The **Live stats** panel shows, updated every frame:
 ## How it works
 
 - **Speed:** every frame the plugin checks whether the player's cell is an interior and sets the player's base
-  `SpeedMult` actor value to the configured value when it differs. The value is stored in the save, so before
-  uninstalling set `bSpeedByCellEnabled = false` and save once to return to 100.
+  `SpeedMult` actor value to the configured value when it differs. Right before every save (manual, quick or
+  autosave) it puts SpeedMult back to 100, and the next frame applies the configured value again, so saves never
+  hold the mod's speed and the mod can be removed at any time.
 - **Swing detection:** the controllers' velocities are read from the OpenVR compositor's poses and taken relative to
   the headset, so head bobbing while walking in place doesn't count. The slower hand's speed (zero when the hands move
   the same way) is smoothed, and separate start and stop thresholds with a stop delay keep the sprint from flickering.
   Swinging is ignored while the Pip-Boy, pause, loading, workshop or dialogue menus are open.
 - **Sprint button:** the plugin hooks `IVRSystem::GetControllerState[WithPose]` on top of any existing hooks and adds
-  the sprint button press to the controller state the game reads. The physical controllers and the KAT input are
-  passed through unchanged.
-- **MCM:** MCM VR stores its values in `Data\MCM\Settings\KATLocomotionVR.ini` (defaults in
-  `Data\MCM\Config\KATLocomotionVR\settings.ini`). The plugin checks these files twice a second. The `[ - ]`/`[ + ]`
-  buttons call the Papyrus global function `KATLocomotionVR_MCM.StepFloat`, which steps the value with MCM's
+  the sprint button press to the controller state the game reads. The physical controllers and any locomotion
+  device input (such as KAT) are passed through unchanged.
+- **MCM:** MCM VR stores its values in `Data\MCM\Settings\SwingSprintVR.ini` (defaults in
+  `Data\MCM\Config\SwingSprintVR\settings.ini`). The plugin checks these files twice a second. The `[ - ]`/`[ + ]`
+  buttons call the Papyrus global function `SwingSprintVR_MCM.StepFloat`, which steps the value with MCM's
   Papyrus API and refreshes the menu.
 
 ## Building from source
@@ -119,15 +129,15 @@ Requirements: Windows, Visual Studio 2026 (v145) or 2022 (v143) with C++ desktop
 [vcpkg](https://github.com/microsoft/vcpkg) (the one bundled with Visual Studio works) and Git.
 
 ```bash
-git clone --recursive https://github.com/<you>/KATLocomotionVR.git
-cd KATLocomotionVR
+git clone --recursive https://github.com/<you>/SwingSprintVR.git
+cd SwingSprintVR
 set VCPKG_ROOT=C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\vcpkg
 cmake --preset default
 cmake --build --preset release
 cmake --build --preset package
 ```
 
-- The plugin is built to `build/Release/KATLocomotionVR.dll`.
+- The plugin is built to `build/Release/SwingSprintVR.dll`.
 - The `package` preset makes the installable archive in `build/package/`.
 - To copy the DLL to your game or MO2 mod folder on every build, create a `CMakeUserPresets.json` from
   `external/F4VR-CommonFramework/mod-template/CMakeUserPresets.json.template`.
@@ -140,24 +150,24 @@ cl /std:c++20 /EHsc /I..\src SwingDetectorTest.cpp ..\src\SwingDetector.cpp /Fe:
 swingtest.exe
 ```
 
-The Papyrus script for the MCM buttons (`data/mod/Scripts/Source/User/KATLocomotionVR_MCM.psc`) is compiled with the
+The Papyrus script for the MCM buttons (`data/mod/Scripts/Source/User/SwingSprintVR_MCM.psc`) is compiled with the
 Fallout 4 Creation Kit's Papyrus compiler; the compiled `.pex` is committed so a normal build doesn't need it. To
 rebuild it, extract `Fallout 4\Data\Scripts\Source\Base\Base.zip` and get `MCM.psc` from the MCM download, then
 from `data/mod/Scripts/Source/User`:
 
 ```bash
-"<Fallout 4>\Papyrus Compiler\PapyrusCompiler.exe" KATLocomotionVR_MCM.psc -f=<Base>\Institute_Papyrus_Flags.flg -i=.;<folder with MCM.psc>;<Base> -o=..\.. -release -final
+"<Fallout 4>\Papyrus Compiler\PapyrusCompiler.exe" SwingSprintVR_MCM.psc -f=<Base>\Institute_Papyrus_Flags.flg -i=.;<folder with MCM.psc>;<Base> -o=..\.. -release -final
 ```
 
 ### Project layout
 
 | Path | Contents |
 | --- | --- |
-| `src/KATLocomotionVR.*` | Plugin entry, speed by cell, sprint logic, Live stats |
+| `src/SwingSprintVR.*` | Plugin entry, speed by cell, sprint logic, Live stats |
 | `src/SwingDetector.*` | Arm swing detection (pure logic, tested) |
 | `src/SprintInjector.*` | OpenVR controller-state hook that presses the sprint button |
 | `src/Config.*` | INI and MCM settings |
-| `data/config/KATLocomotionVR.ini` | Default INI, embedded into the DLL |
+| `data/config/SwingSprintVR.ini` | Default INI, embedded into the DLL |
 | `data/mod/` | Files shipped in the archive (MCM menu, Papyrus script for the - / + buttons) |
 | `external/F4VR-CommonFramework` | Git submodule: the framework and CommonLibF4VR |
 | `tests/` | Standalone tests |
@@ -181,7 +191,7 @@ mod is released under the same license.
 
 ## Suomeksi
 
-KAT Locomotion VR on Fallout 4 VR:n F4SEVR-lisäosa KAT Loco S -kävelylaitteelle ja Quest 2 -ohjaimille:
-eri liikkumisnopeus sisä- ja ulkotiloissa, juoksu käsiä heiluttamalla, MCM VR -valikko sekä reaaliaikainen
-Live stats -testinäkymä. Asennus MO2:lla: *Install a new mod from an archive*, ja lisäksi tarvitaan
+Swing Sprint VR on Fallout 4 VR:n F4SEVR-lisäosa: juoksu käsiä heiluttamalla, eri liikkumisnopeus sisä- ja
+ulkotiloissa, MCM VR -valikko sekä reaaliaikainen Live stats -testinäkymä. Toimii itsenäisesti millä tahansa
+VR-ohjaimilla ja liikkumistavalla, myös KAT Loco S:n kanssa. Nopeus ei tallennu save-tiedostoon. Asennus MO2:lla: *Install a new mod from an archive*, ja lisäksi tarvitaan
 VR Address Library for F4SEVR. Asetukset muuttuvat pelin aikana MCM:stä tai INI-tiedostosta.

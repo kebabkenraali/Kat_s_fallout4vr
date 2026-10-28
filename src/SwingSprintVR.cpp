@@ -1,4 +1,4 @@
-#include "KATLocomotionVR.h"
+#include "SwingSprintVR.h"
 
 #include "SprintInjector.h"
 #include "debug/DebugDraw.h"
@@ -16,7 +16,7 @@ extern "C" DLLEXPORT bool F4SEAPI F4SEPlugin_Load(const F4SE::LoadInterface* a_f
     return g_mod->onF4SEPluginLoad(a_f4se);
 }
 
-namespace kat_loco
+namespace swing_sprint
 {
     namespace
     {
@@ -83,20 +83,45 @@ namespace kat_loco
                 return f4vr::isLeftHandedMode();
             }
         }
+
+        /**
+         * Keep the speed out of save games: right before the game saves (manual, quick or autosave), put the base
+         * SpeedMult back to the default, so the save never holds the mod's value and the mod can be removed any time.
+         * The next frame's updateCellSpeed applies the configured speed again.
+         */
+        void onF4SEMessage(F4SE::MessagingInterface::Message* msg)
+        {
+            if (!msg || msg->type != F4SE::MessagingInterface::kPreSaveGame) {
+                return;
+            }
+            const auto player = RE::PlayerCharacter::GetSingleton();
+            const auto actorValues = RE::ActorValue::GetSingleton();
+            if (!player || !actorValues || !actorValues->speedMult) {
+                return;
+            }
+            const float current = player->GetBaseActorValue(*actorValues->speedMult);
+            if (std::abs(current - DEFAULT_SPEED_MULT) >= 0.01f) {
+                logger::info("Saving game: SpeedMult {:.1f} -> {:.1f} for the save", current, DEFAULT_SPEED_MULT);
+                player->SetBaseActorValue(*actorValues->speedMult, DEFAULT_SPEED_MULT);
+            }
+        }
     }
 
     /**
      * Run F4SE plugin load and initialize the plugin given the init handle.
      */
-    void KATLocomotionVR::onModLoaded(const F4SE::LoadInterface*)
+    void SwingSprintVR::onModLoaded(const F4SE::LoadInterface*)
     {
-        //noop
+        // the framework has its own listener; F4SE calls every listener a plugin registers
+        if (const auto messaging = F4SE::GetMessagingInterface(); !messaging || !messaging->RegisterListener(onF4SEMessage)) {
+            logger::warn("Failed to register the F4SE save listener; the speed will be stored in save games");
+        }
     }
 
     /**
      * On game fully loaded initialize things that should be initialized only once.
      */
-    void KATLocomotionVR::onGameLoaded()
+    void SwingSprintVR::onGameLoaded()
     {
         //noop
     }
@@ -104,7 +129,7 @@ namespace kat_loco
     /**
      * Game session can be initialized multiple times as it is fired on new game and save loaded events.
      */
-    void KATLocomotionVR::onGameSessionLoaded()
+    void SwingSprintVR::onGameSessionLoaded()
     {
         _swing.reset();
         setSprintPressed(false);
@@ -116,7 +141,7 @@ namespace kat_loco
     /**
      * On every frame if player is initialized.
      */
-    void KATLocomotionVR::onFrameUpdate()
+    void SwingSprintVR::onFrameUpdate()
     {
         const auto now = std::chrono::steady_clock::now();
         // clamp so a hitch or a loading screen doesn't look like a long swing
@@ -148,7 +173,7 @@ namespace kat_loco
      * Set the player's base SpeedMult to the configured interior or exterior value. Checked every frame, so cell
      * changes and INI edits (hot-reload) apply right away. Only writes when the value differs.
      */
-    void KATLocomotionVR::updateCellSpeed(RE::PlayerCharacter* player)
+    void SwingSprintVR::updateCellSpeed(RE::PlayerCharacter* player)
     {
         const auto cell = player->GetParentCell();
         if (!cell) {
@@ -183,7 +208,7 @@ namespace kat_loco
      * Read both controllers' velocities from the compositor's last poses, detect running-like arm swinging, and
      * press the game's sprint button while it lasts.
      */
-    void KATLocomotionVR::updateSwingSprint(const float dt)
+    void SwingSprintVR::updateSwingSprint(const float dt)
     {
         auto* system = vr::VRSystem();
         auto* compositor = vr::VRCompositor();
@@ -250,7 +275,7 @@ namespace kat_loco
      * The player's actual horizontal movement speed, from the position change between frames, smoothed. Shows in
      * the live stats how the speed settings and the sprint really change the movement.
      */
-    void KATLocomotionVR::updateMovedSpeed(RE::PlayerCharacter* player, const float dt)
+    void SwingSprintVR::updateMovedSpeed(RE::PlayerCharacter* player, const float dt)
     {
         const auto pos = player->GetPosition();
         if (_hasLastPos && dt > 0.0f) {
@@ -270,7 +295,7 @@ namespace kat_loco
      * Live stats floating in front of the player: what the mod sees and does this very frame, so the effect of a
      * setting changed in MCM or the INI can be watched while moving.
      */
-    void KATLocomotionVR::drawLiveStats() const
+    void SwingSprintVR::drawLiveStats() const
     {
         using namespace render::colors;
         auto& dd = debug::dd();
@@ -293,7 +318,7 @@ namespace kat_loco
         dd.watch("Button pressed", _sprintPressed ? "yes" : "no", _sprintPressed ? Green : Grey);
     }
 
-    void KATLocomotionVR::setSprintPressed(const bool pressed)
+    void SwingSprintVR::setSprintPressed(const bool pressed)
     {
         if (pressed == _sprintPressed) {
             return;

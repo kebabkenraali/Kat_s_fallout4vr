@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace kat_loco
+namespace swing_sprint
 {
     namespace
     {

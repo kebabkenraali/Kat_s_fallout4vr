@@ -2,7 +2,7 @@
 
 #include <array>
 
-namespace kat_loco
+namespace swing_sprint
 {
     using Vec3 = std::array<float, 3>;
 

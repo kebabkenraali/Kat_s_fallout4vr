@@ -12,8 +12,8 @@ namespace
 
     // MCM keeps its values in its own INI files, relative to the game folder (MO2's virtual Data folder works the same)
     const char* MCM_SECTION = "Main";
-    const std::filesystem::path MCM_DEFAULTS_PATH = "Data\\MCM\\Config\\KATLocomotionVR\\settings.ini";
-    const std::filesystem::path MCM_USER_PATH = "Data\\MCM\\Settings\\KATLocomotionVR.ini";
+    const std::filesystem::path MCM_DEFAULTS_PATH = "Data\\MCM\\Config\\SwingSprintVR\\settings.ini";
+    const std::filesystem::path MCM_USER_PATH = "Data\\MCM\\Settings\\SwingSprintVR.ini";
     const std::filesystem::path MCM_PLUGIN_PATH = "Data\\F4SE\\Plugins\\mcm_vr.dll";
 
     // The sprint button choices of the MCM dropdown, in the order of its options
@@ -64,7 +64,7 @@ namespace
     }
 }
 
-namespace kat_loco
+namespace swing_sprint
 {
     void Config::loadIniConfigInternal(const CSimpleIniA& ini)
     {
