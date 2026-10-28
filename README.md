@@ -143,7 +143,7 @@ swingtest.exe
 | `src/SprintInjector.*` | OpenVR controller-state hook that presses the sprint button |
 | `src/Config.*` | INI and MCM settings |
 | `data/config/KATLocomotionVR.ini` | Default INI, embedded into the DLL |
-| `data/mod/` | Files shipped in the archive (MCM config, framework assets) |
+| `data/mod/` | Files shipped in the archive (MCM menu) |
 | `external/F4VR-CommonFramework` | Git submodule: the framework and CommonLibF4VR |
 | `tests/` | Standalone tests |
 
