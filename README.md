@@ -13,6 +13,8 @@ locomotion) and **Meta Quest 2** controllers:
 
 > Not affiliated with KAT VR, Meta, Valve or Bethesda.
 
+Made with Claude AI
+
 ## Requirements
 
 | Requirement | Notes |
