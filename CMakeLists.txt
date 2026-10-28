@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 4.2)
 # >>> Project
 set(NAME "KATLocomotionVR")
 set(FRIENDLY_NAME "KAT Locomotion VR")
-set(VERSION 0.2.1)
+set(VERSION 0.3.0)
 
 message(">>> Start build for '${NAME}' v${VERSION}")
 

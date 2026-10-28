@@ -8,6 +8,7 @@ locomotion) and **Meta Quest 2** controllers:
 - **Sprint by swinging your arms** – swing the controllers like running arms and the mod presses the game's sprint
   button for you. You keep walking with your feet; your arms decide when you run.
 - **MCM VR menu** – every main setting can be changed in game from Mod Configuration Menu, applied immediately.
+  Each slider has `[ - ]` and `[ + ]` buttons below it, since sliders are hard to drag in VR.
 - **Live stats** – a real-time panel in front of you showing location, speed values, your measured movement speed,
   hand and swing speed against the thresholds, and sprint state, so you can see what each change does while you move.
 
@@ -44,6 +45,9 @@ Changes are applied while the game is running, both from MCM and from the INI fi
 
 **When MCM VR is installed, the values on its *KAT Locomotion VR* page override the same values in the INI file.**
 Settings MCM doesn't show stay in the INI.
+
+VR sliders are hard to drag, so every slider on the MCM page has a `[ - ]` and a `[ + ]` button below it that
+steps the value by the slider's step (5 for speeds, 0.1 or 0.05 for the swing values).
 
 ### Movement speed by location
 
@@ -105,7 +109,9 @@ The **Live stats** panel shows, updated every frame:
   the sprint button press to the controller state the game reads. The physical controllers and the KAT input are
   passed through unchanged.
 - **MCM:** MCM VR stores its values in `Data\MCM\Settings\KATLocomotionVR.ini` (defaults in
-  `Data\MCM\Config\KATLocomotionVR\settings.ini`). The plugin checks these files twice a second.
+  `Data\MCM\Config\KATLocomotionVR\settings.ini`). The plugin checks these files twice a second. The `[ - ]`/`[ + ]`
+  buttons call the Papyrus global function `KATLocomotionVR_MCM.StepFloat`, which steps the value with MCM's
+  Papyrus API and refreshes the menu.
 
 ## Building from source
 
@@ -134,6 +140,15 @@ cl /std:c++20 /EHsc /I..\src SwingDetectorTest.cpp ..\src\SwingDetector.cpp /Fe:
 swingtest.exe
 ```
 
+The Papyrus script for the MCM buttons (`data/mod/Scripts/Source/User/KATLocomotionVR_MCM.psc`) is compiled with the
+Fallout 4 Creation Kit's Papyrus compiler; the compiled `.pex` is committed so a normal build doesn't need it. To
+rebuild it, extract `Fallout 4\Data\Scripts\Source\Base\Base.zip` and get `MCM.psc` from the MCM download, then
+from `data/mod/Scripts/Source/User`:
+
+```bash
+"<Fallout 4>\Papyrus Compiler\PapyrusCompiler.exe" KATLocomotionVR_MCM.psc -f=<Base>\Institute_Papyrus_Flags.flg -i=.;<folder with MCM.psc>;<Base> -o=..\.. -release -final
+```
+
 ### Project layout
 
 | Path | Contents |
@@ -143,7 +158,7 @@ swingtest.exe
 | `src/SprintInjector.*` | OpenVR controller-state hook that presses the sprint button |
 | `src/Config.*` | INI and MCM settings |
 | `data/config/KATLocomotionVR.ini` | Default INI, embedded into the DLL |
-| `data/mod/` | Files shipped in the archive (MCM menu) |
+| `data/mod/` | Files shipped in the archive (MCM menu, Papyrus script for the - / + buttons) |
 | `external/F4VR-CommonFramework` | Git submodule: the framework and CommonLibF4VR |
 | `tests/` | Standalone tests |
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 - 2026-10-28
+
+- MCM: every slider has - and + buttons below it that step the value, since VR sliders are hard to drag.
+
 ## 0.2.1 - 2026-10-28
 
 - Removed unused framework textures and mesh from the package; it now ships only the plugin and the MCM menu.

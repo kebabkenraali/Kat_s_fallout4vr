@@ -16,7 +16,6 @@
       "type": "spacer",
       "numLines": 1
     },
-
     {
       "text": "Movement speed by location",
       "type": "section"
@@ -43,6 +42,38 @@
       }
     },
     {
+      "text": "        [ - ]   -5",
+      "type": "button",
+      "help": "Lower Interior speed by 5 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fInteriorSpeedMult:Main",
+          "{f}-5",
+          "{f}30",
+          "{f}200"
+        ]
+      }
+    },
+    {
+      "text": "        [ + ]   +5",
+      "type": "button",
+      "help": "Raise Interior speed by 5 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fInteriorSpeedMult:Main",
+          "{f}5",
+          "{f}30",
+          "{f}200"
+        ]
+      }
+    },
+    {
       "id": "fExteriorSpeedMult:Main",
       "text": "Exterior speed",
       "type": "slider",
@@ -55,10 +86,41 @@
       }
     },
     {
+      "text": "        [ - ]   -5",
+      "type": "button",
+      "help": "Lower Exterior speed by 5 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fExteriorSpeedMult:Main",
+          "{f}-5",
+          "{f}30",
+          "{f}200"
+        ]
+      }
+    },
+    {
+      "text": "        [ + ]   +5",
+      "type": "button",
+      "help": "Raise Exterior speed by 5 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fExteriorSpeedMult:Main",
+          "{f}5",
+          "{f}30",
+          "{f}200"
+        ]
+      }
+    },
+    {
       "type": "spacer",
       "numLines": 1
     },
-
     {
       "text": "Sprint by swinging arms",
       "type": "section"
@@ -98,7 +160,10 @@
       "type": "dropdown",
       "help": "Hold: the button is held while swinging. Tap: a short press when swinging starts and another when it stops (use if sprint flickers).",
       "valueOptions": {
-        "options": ["Hold", "Tap"],
+        "options": [
+          "Hold",
+          "Tap"
+        ],
         "sourceType": "ModSettingInt"
       }
     },
@@ -124,6 +189,38 @@
       }
     },
     {
+      "text": "        [ - ]   -0.1",
+      "type": "button",
+      "help": "Lower Swing speed to start sprint by 0.1 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSwingStartSpeed:Main",
+          "{f}-0.1",
+          "{f}0.5",
+          "{f}4"
+        ]
+      }
+    },
+    {
+      "text": "        [ + ]   +0.1",
+      "type": "button",
+      "help": "Raise Swing speed to start sprint by 0.1 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSwingStartSpeed:Main",
+          "{f}0.1",
+          "{f}0.5",
+          "{f}4"
+        ]
+      }
+    },
+    {
       "id": "fSwingStopSpeed:Main",
       "text": "Swing speed to stop sprint",
       "type": "slider",
@@ -133,6 +230,38 @@
         "min": 0.2,
         "max": 3.0,
         "step": 0.1
+      }
+    },
+    {
+      "text": "        [ - ]   -0.1",
+      "type": "button",
+      "help": "Lower Swing speed to stop sprint by 0.1 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSwingStopSpeed:Main",
+          "{f}-0.1",
+          "{f}0.2",
+          "{f}3"
+        ]
+      }
+    },
+    {
+      "text": "        [ + ]   +0.1",
+      "type": "button",
+      "help": "Raise Swing speed to stop sprint by 0.1 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSwingStopSpeed:Main",
+          "{f}0.1",
+          "{f}0.2",
+          "{f}3"
+        ]
       }
     },
     {
@@ -148,6 +277,38 @@
       }
     },
     {
+      "text": "        [ - ]   -0.05",
+      "type": "button",
+      "help": "Lower Swing smoothing (s) by 0.05 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSwingSmoothing:Main",
+          "{f}-0.05",
+          "{f}0.05",
+          "{f}1"
+        ]
+      }
+    },
+    {
+      "text": "        [ + ]   +0.05",
+      "type": "button",
+      "help": "Raise Swing smoothing (s) by 0.05 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSwingSmoothing:Main",
+          "{f}0.05",
+          "{f}0.05",
+          "{f}1"
+        ]
+      }
+    },
+    {
       "id": "fSprintStopDelay:Main",
       "text": "Sprint stop delay (s)",
       "type": "slider",
@@ -160,10 +321,41 @@
       }
     },
     {
+      "text": "        [ - ]   -0.1",
+      "type": "button",
+      "help": "Lower Sprint stop delay (s) by 0.1 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSprintStopDelay:Main",
+          "{f}-0.1",
+          "{f}0",
+          "{f}2"
+        ]
+      }
+    },
+    {
+      "text": "        [ + ]   +0.1",
+      "type": "button",
+      "help": "Raise Sprint stop delay (s) by 0.1 (VR sliders are hard to drag).",
+      "action": {
+        "type": "CallGlobalFunction",
+        "script": "KATLocomotionVR_MCM",
+        "function": "StepFloat",
+        "params": [
+          "fSprintStopDelay:Main",
+          "{f}0.1",
+          "{f}0",
+          "{f}2"
+        ]
+      }
+    },
+    {
       "type": "spacer",
       "numLines": 1
     },
-
     {
       "text": "Testing",
       "type": "section"
