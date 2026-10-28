@@ -1,0 +1,181 @@
+{
+  "minMcmVersion": 1,
+  "modName": "KATLocomotionVR",
+  "displayName": "KAT Locomotion VR",
+  "content": [
+    {
+      "text": "<font size=\"32\"><p align=\"center\">KAT Locomotion VR</p></font>",
+      "html": true,
+      "type": "text"
+    },
+    {
+      "text": "Changes apply immediately. Turn on Live stats to see their effect while you move.",
+      "type": "text"
+    },
+    {
+      "type": "spacer",
+      "numLines": 1
+    },
+
+    {
+      "text": "Movement speed by location",
+      "type": "section"
+    },
+    {
+      "id": "bSpeedByCellEnabled:Main",
+      "text": "Separate interior/exterior speed",
+      "type": "switcher",
+      "help": "Set the movement speed separately for interiors and exteriors. Off restores the default speed (100).",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    },
+    {
+      "id": "fInteriorSpeedMult:Main",
+      "text": "Interior speed",
+      "type": "slider",
+      "help": "Speed multiplier in interiors (buildings, vaults, caves). 100 = game default.",
+      "valueOptions": {
+        "sourceType": "ModSettingFloat",
+        "min": 30,
+        "max": 200,
+        "step": 5
+      }
+    },
+    {
+      "id": "fExteriorSpeedMult:Main",
+      "text": "Exterior speed",
+      "type": "slider",
+      "help": "Speed multiplier in exteriors (the open world, Diamond City). 100 = game default.",
+      "valueOptions": {
+        "sourceType": "ModSettingFloat",
+        "min": 30,
+        "max": 200,
+        "step": 5
+      }
+    },
+    {
+      "type": "spacer",
+      "numLines": 1
+    },
+
+    {
+      "text": "Sprint by swinging arms",
+      "type": "section"
+    },
+    {
+      "id": "bSwingSprintEnabled:Main",
+      "text": "Arm swing sprint",
+      "type": "switcher",
+      "help": "Sprint while swinging the controllers like running arms.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    },
+    {
+      "id": "iSprintButton:Main",
+      "text": "Game sprint button",
+      "type": "dropdown",
+      "help": "The button the game uses for sprint. The mod presses it for you while you swing.",
+      "valueOptions": {
+        "options": [
+          "Offhand thumbstick click",
+          "Offhand grip",
+          "Offhand trigger",
+          "Offhand X",
+          "Offhand Y",
+          "Primary thumbstick click",
+          "Primary grip",
+          "Primary A",
+          "Primary B"
+        ],
+        "sourceType": "ModSettingInt"
+      }
+    },
+    {
+      "id": "iSprintMode:Main",
+      "text": "Sprint button mode",
+      "type": "dropdown",
+      "help": "Hold: the button is held while swinging. Tap: a short press when swinging starts and another when it stops (use if sprint flickers).",
+      "valueOptions": {
+        "options": ["Hold", "Tap"],
+        "sourceType": "ModSettingInt"
+      }
+    },
+    {
+      "id": "bRequireAlternatingArms:Main",
+      "text": "Require alternating arms",
+      "type": "switcher",
+      "help": "Only count swings where the hands move in opposite directions, like running arms.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    },
+    {
+      "id": "fSwingStartSpeed:Main",
+      "text": "Swing speed to start sprint",
+      "type": "slider",
+      "help": "Hand speed (m/s, relative to the headset) that starts the sprint. Higher = harder swing needed.",
+      "valueOptions": {
+        "sourceType": "ModSettingFloat",
+        "min": 0.5,
+        "max": 4.0,
+        "step": 0.1
+      }
+    },
+    {
+      "id": "fSwingStopSpeed:Main",
+      "text": "Swing speed to stop sprint",
+      "type": "slider",
+      "help": "Hand speed below which the sprint stops. Keep lower than the start speed.",
+      "valueOptions": {
+        "sourceType": "ModSettingFloat",
+        "min": 0.2,
+        "max": 3.0,
+        "step": 0.1
+      }
+    },
+    {
+      "id": "fSwingSmoothing:Main",
+      "text": "Swing smoothing (s)",
+      "type": "slider",
+      "help": "Smoothing of the swing speed. Higher = steadier but slower to react.",
+      "valueOptions": {
+        "sourceType": "ModSettingFloat",
+        "min": 0.05,
+        "max": 1.0,
+        "step": 0.05
+      }
+    },
+    {
+      "id": "fSprintStopDelay:Main",
+      "text": "Sprint stop delay (s)",
+      "type": "slider",
+      "help": "How long the swing must stay slow before the sprint stops.",
+      "valueOptions": {
+        "sourceType": "ModSettingFloat",
+        "min": 0.0,
+        "max": 2.0,
+        "step": 0.1
+      }
+    },
+    {
+      "type": "spacer",
+      "numLines": 1
+    },
+
+    {
+      "text": "Testing",
+      "type": "section"
+    },
+    {
+      "id": "bShowLiveStats:Main",
+      "text": "Live stats",
+      "type": "switcher",
+      "help": "Show location, speed, measured movement speed, swing speed against the thresholds and sprint state floating in front of you, updated in real time.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    }
+  ]
+}
